@@ -33,18 +33,7 @@ public class BFService implements MethodService {
                 int flag = Common.compareStorage(o1, o2);
                 return flag;
             });
-            for(Storage storage:storageList){
-                if(job.getStatus().equals("N") && job.getSize()<=storageList.get(i).getLeaveSize()){
-                    job.setBlockId(storageList.get(i).getSid());
-                    job.setStatus("Y");
-
-                    storage.setLeaveSize(storage.getLeaveSize()-job.getSize());
-                    storage.setJid(storage.getJid() + "|" + job.getId());
-
-                    break;
-                }
-                i++;
-            }
+            Common.getResult(job,storageList,i);
         }
         storageResponse.setJobList(jobList);
         storageResponse.setStorageList(storageList);

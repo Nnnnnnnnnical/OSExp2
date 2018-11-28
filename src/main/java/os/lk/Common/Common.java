@@ -3,6 +3,8 @@ package os.lk.Common;
 import os.lk.Entity.Job;
 import os.lk.Entity.Storage;
 
+import java.util.List;
+
 public class Common {
 
     public static int Sum = 8;
@@ -32,6 +34,21 @@ public class Common {
             return 0;
         } else {
             return -1;
+        }
+    }
+
+    public static void getResult(Job job, List<Storage> storageList,int i){
+        for(Storage storage:storageList){
+            if(job.getStatus().equals("N") && job.getSize()<=storageList.get(i).getLeaveSize()){
+                job.setBlockId(storageList.get(i).getSid());
+                job.setStatus("Y");
+
+                storage.setLeaveSize(storage.getLeaveSize()-job.getSize());
+                storage.setJid(storage.getJid() + "|" + job.getId());
+
+                break;
+            }
+            i++;
         }
     }
 }

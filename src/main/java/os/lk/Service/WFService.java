@@ -32,18 +32,8 @@ public class WFService implements MethodService {
                 return flag;
             });
             Collections.reverse(storageList);
-            for(Storage storage:storageList){
-                if(job.getStatus().equals("N") && job.getSize()<=storageList.get(i).getLeaveSize()){
-                    job.setBlockId(storageList.get(i).getSid());
-                    job.setStatus("Y");
+            Common.getResult(job,storageList,i);
 
-                    storage.setLeaveSize(storage.getLeaveSize()-job.getSize());
-                    storage.setJid(storage.getJid() + "|" + job.getId());
-
-                    break;
-                }
-                i++;
-            }
         }
         storageResponse.setJobList(jobList);
         storageResponse.setStorageList(storageList);
