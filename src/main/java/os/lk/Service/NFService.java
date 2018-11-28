@@ -28,6 +28,7 @@ public class NFService implements MethodService{
                     storageList.get(j).setJid(storageList.get(j).getJid() + "|" + job.getId());
 
 
+                    j=(++j)%8;
                     break;
                 }
 

@@ -1,10 +1,7 @@
 package os.lk.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import os.lk.Entity.Job;
 import os.lk.Entity.Storage;
 import os.lk.Param.Response.StorageResponse;
@@ -49,5 +46,12 @@ public class StorageController {
             return wfService.method(jobList,storagesList,storageResponse);
         }
         return null;
+    }
+
+    @RequestMapping(value = "storage/recover",method = RequestMethod.POST)
+    public StorageResponse recover(@RequestBody StorageResponse storageResponse){
+        storageResponse.setStorageList(storageResponse.getrStorageList());
+        storageResponse.setJobList(storageResponse.getrJobList());
+        return storageResponse;
     }
 }
