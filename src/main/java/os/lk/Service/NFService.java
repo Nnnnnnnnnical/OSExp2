@@ -1,6 +1,7 @@
 package os.lk.Service;
 
 import org.springframework.stereotype.Service;
+import os.lk.Common.Common;
 import os.lk.Entity.Job;
 import os.lk.Entity.Storage;
 import os.lk.Param.Response.StorageResponse;
@@ -19,7 +20,7 @@ public class NFService implements MethodService{
 
         int j = 0;
         for(Job job:jobList){
-            for(int i = 0;i<8;i++,j=(++j)%8){
+            for(int i = 0; i< Common.Sum; i++,j=(++j)%Common.Sum){
                 if(job.getStatus().equals("N") && storageList.get(j).getLeaveSize()>=job.getSize()){
                     job.setStatus("Y");
                     job.setBlockId(storageList.get(j).getSid());
@@ -28,7 +29,7 @@ public class NFService implements MethodService{
                     storageList.get(j).setJid(storageList.get(j).getJid() + "|" + job.getId());
 
 
-                    j=(++j)%8;
+                    j=(++j)%Common.Sum;
                     break;
                 }
 

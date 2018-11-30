@@ -17,12 +17,6 @@ import java.util.List;
 public class WFService implements MethodService {
     @Override
     public StorageResponse method(List<Job> jobList, List<Storage> storageList, StorageResponse storageResponse) {
-        //按照作业大小从小到大排序
-        Collections.sort(jobList, (o1, o2) -> {
-            int flag = Common.compareJob(o1, o2);
-            return flag;
-        });
-
         for(Job job:jobList){
             int i = 0;
 
